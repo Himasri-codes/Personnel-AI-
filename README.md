@@ -14,7 +14,7 @@ voices = engine.getProperty('voices')
 engine.setProperty('voice', voices[1].id)  # Use female voice
 
 def talk(text):
-    print("🎙️ CHITTI:", text)
+    print("CHITTI:", text)
     engine.say(text)
     engine.runAndWait() 
 
@@ -29,7 +29,7 @@ def take_command():
         command = command.lower()
         print("You said:", command)
     except sr.UnknownValueError:
-        talk("Sorry bro, I didn’t catch that.")
+        talk("Sorry, I didn’t catch that.")
         return ""
     except sr.RequestError:
         talk("Network issue with Google service.")
@@ -85,6 +85,6 @@ def run_chitti():
   elif command != "":
         talk("I heard you, but I don’t understand that yet ")
 
-talk("Yo! I'm JARVIS your personal voice assistant ")
+talk("Yo! I'm CHITTI your personal voice assistant ")
 while True:
     run_chitti()

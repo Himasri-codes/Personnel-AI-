@@ -11,7 +11,7 @@ import sys
 engine = pyttsx3.init()
 engine.setProperty('rate', 170)
 voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[1].id)  # Use female voice
+engine.setProperty('voice', voices[1].id)  #Female voice
 
 def talk(text):
     print("CHITTI:", text)
@@ -29,7 +29,7 @@ def take_command():
         command = command.lower()
         print("You said:", command)
     except sr.UnknownValueError:
-        talk("Sorry, I didn’t catch that.")
+        talk("Sorry, I didn’t hear that.")
         return ""
     except sr.RequestError:
         talk("Network issue with Google service.")
@@ -50,7 +50,7 @@ def run_chitti():
 
    elif "who is himasri" in command or "tell me about himasri" in command:
         info = (
-            "Himasri , she is 4th year  aiml student living in amalapuram."
+            "Himasri ,she is 4th year  aiml student living in amalapuram."
             "She loves to learn the ai tools."
         )
         talk(info)

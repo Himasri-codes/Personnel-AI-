@@ -1,90 +1,70 @@
-import Speech_recognition as sr
-import pyttsx3
-import pywhatkit
-import datetime
-import wikipedia
-import pyjokes
-import os
-import sys
+Face Detection with Triangles 🎭
+This project uses OpenCV and NumPy to detect faces in real time through a webcam and draws a triangle around each detected face instead of the usual rectangle.
+🚀 Features
 
-#speech engine
-engine = pyttsx3.init()
-engine.setProperty('rate', 170)
-voices = engine.getProperty('voices')
-engine.setProperty('voice', voices[1].id)  #Female voice
+Real-time face detection using your webcam
 
-def talk(text):
-    print("CHITTI:", text)
-    engine.say(text)
-    engine.runAndWait() 
+Triangular bounding instead of rectangular boxes
 
-def take_command():
-    listener = sr.Recognizer()
-    with sr.Microphone() as source:
-        print("Listening...")    
-        listener.adjust_for_ambient_noise(source)
-        voice = listener.listen(source)
-    try:
-        command = listener.recognize_google(voice)
-        command = command.lower()
-        print("You said:", command)
-    except sr.UnknownValueError:
-        talk("Sorry, I didn’t hear that.")
-        return ""
-    except sr.RequestError:
-        talk("Network issue with Google service.")
-        return ""
-    return command
-    
-def run_chitti():
-    command = take_command()
+Press q to quit the window
 
-  if "play" in command:
-        song = command.replace("play", "")
-        talk("Playing on YouTube")
-        pywhatkit.playonyt(song)
+🖥️ Demo
 
-   elif "what's the time" in command:
-        time = datetime.datetime.now().strftime('%I:%M %p')
-        talk(f"It’s {time} ⏰")
+When a face is detected, a green triangle will appear around it:
 
-   elif "who is himasri" in command or "tell me about himasri" in command:
-        info = (
-            "Himasri ,she is 4th year  aiml student living in amalapuram."
-            "She loves to learn the ai tools."
-        )
-        talk(info)
+     /\
+    /  \
+   /____\
 
-   elif "who is" in command:
-        person = command.replace("who is", "").strip()
-        try:
-            info = wikipedia.summary(person, sentences=1)
-            talk(info)
-        except:
-            talk("Sorry, I couldn’t find information about that person.")
+📦 Requirements
 
-  elif "joke" in command:
-        talk(pyjokes.get_joke())
+Python 3.x
 
-  elif "open chrome" in command:
-        chrome_path = "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe"
-        if os.path.exists(chrome_path):
-            talk("Opening Chrome")
-            os.startfile(chrome_path)
-        else:
-            talk("Path not found ")
+OpenCV
 
-  elif "open code" in command or "open vs code" in command:
-        talk("Opening VS Code")
-        os.system("code")
+NumPy
 
-  elif "exit" in command or "stop" in command:
-        talk("Okay , see you later ")
-        sys.exit()
+Install dependencies using:
 
-  elif command != "":
-        talk("I heard you, but I don’t understand that yet ")
+pip install opencv-python numpy
 
-talk("Yo! I'm CHITTI your personal voice assistant ")
-while True:
-    run_chitti()
+▶️ Usage
+
+Clone this repository:
+
+git clone https://github.com/your-username/face-detection-triangle.git
+cd face-detection-triangle
+
+
+Run the script:
+
+python face_triangle.py
+
+
+A window will open showing the webcam feed with triangles drawn around detected faces.
+
+🛠️ Code Overview
+
+Loads OpenCV’s pre-trained Haar Cascade for face detection.
+
+Captures webcam video feed.
+
+Converts frames to grayscale for faster processing.
+
+Detects faces and draws triangles around them using NumPy + OpenCV.
+
+📷 Controls
+
+q → Quit the application
+
+📌 Example Use Cases
+
+Fun visualization for face detection projects
+
+Creative demos for computer vision learning
+
+Alternative to boring rectangles in CV applications
+
+🤝 Contributing
+
+Feel free to fork this repo, open issues, and submit pull requests.
